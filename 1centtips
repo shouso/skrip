@@ -1,0 +1,15 @@
+1 Cent Tips : Mengatasi Tor yang Ngadat di Debian Wheezy
+
+
+Seneng anonim pas lagi internetan?? make Tor dong salah satu pilihannya. Apasih Tor?? Ah ribet ngebahasnya... silahkan yang yang lebih berkompeten membahasnya....hehe
+ 
+Saya nggak akan membahas apa sih TOR dan bagaimana install dan segala macem, sekarang, karena cuma berbagi sedikit cerita kalo-kalo Tornya ngadat kayak saya kemarin dulu. Awalnya saya juga binun nih, kenapa nih Vidalianya Tor ga mau jalan, padahal udah saya coba di root juga, tetep juga ga mau.
+ 
+Setelah, baca pesan erornya emang ternyata si Tor ini bukan punya si root, ataupun punya user name saya, tetapi punyanya si Debian-tor. Nah lho?Ternyata eh ternyata pas install si Tor ini, otomatis di kasih ke Debian-tor kepemilikannya. So, kalo mau jalan ya mesti diubah jadi milik ente.
+ 
+Caranya gimana? gampang kok, tinggal ganti tipe akun anda dari standar menjadi Administrator, cuma ini agak riskan, karena nanti semua kewenangan admin ada di akun ini, so kurang aman, kalo harus mengubah tipe akun dari standar ke Administrator.
+ 
+Cara kedua adalah, dengan mengubah kepemilikan si Tor dari Debian-tor ke user anda, pake perintah chown. Mengubahnya tentunnya harus jadi root dulu ya...Caranya, buka terminal, jadi root, terus ketik chown shouso /usr/sbin/tor. abis itu silahkan ribut dan dicoba lagi Vidalianya... semoga jalan... gudlak.....
+ 
+oya... bukan ribut ya, tapi reboot...
+ 
