@@ -1,0 +1,106 @@
+Debian : Install Driver Proprietary AMD
+
+
+Debian + Non-free firmware emang bukan jodoh.Tau kenapa, emang karena Debian itu punya kebijakan yang rada kaku kalo menyangkut non-free software yang dijabarkan dalam Debian Free Software Guideline (DFSG). Nah, kalo software ga lulus kriteria di DFSG,jangan harap itu software dapat nongkrong di repo resmi Debian. Kalaupun kepepet,semisal itu terkait dengan fungsionalitas hardware (alias firmware) maka biasanya itu akan masuk di seksi non-free di repo, itupun biasanya ga otomatis keinstall pas proses instalasi. Mesti dilakukan penambahan repo sendiri, terus install sendiri. Biasanya yang seperti ini terkait sama hardware semisal driver VGA, dan driver WIFI adapter. Dan, installnya pun kadang-kadang rada ga sekali langsung sukses. Nah, kalo ini terkait sama vga amd radeon. hehehe.. Sebenarnya, Debian menyediakan wiki yang cukup lengkap untuk instalasinya. Berikut ini adalah proses instalasi driver fglrx dari reponya Debian sesuai dengan wiki nya :
+
+
+
+AMD Catalyst 12.6
+For support of Radeon HD 7000, Radeon HD 6000 and Radeon HD 5000 series GPUs. For older devices, see AMD Catalyst Legacy 13.1.
+Add "contrib" and "non-free" components to /etc/apt/sources.list, for example:
+
+# Debian 7 "Wheezy"
+
+
+deb http://http.debian.net/debian/ wheezy main contrib non-free
+
+Update the list of available packages. Install the appropriate linux-headers and fglrx-driver packages:
+
+# aptitude update
+
+
+# aptitude -r install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,') fglrx-driver
+
+This will also install the recommended fglrx-modules-dkms package. DKMS will build the fglrx module for your system.
+Create an Xorg server configuration file.
+Restart your system to enable the radeon blacklist.
+AMD Catalyst Legacy 13.1
+
+For support of Radeon HD 4000, Radeon HD 3000 and Radeon HD 2000 series GPUs.
+
+Add Debian Backports sources to /etc/apt/sources.list, also including the "contrib" and "non-free" components. For example:
+
+# Backported packages for Debian 7 "Wheezy"
+
+
+deb http://http.debian.net/debian/ wheezy-backports main contrib non-free
+
+Update the list of available packages. Install the appropriate linux-headers and fglrx-legacy-driver packages:
+
+# aptitude update
+
+
+# aptitude install linux-headers-$(uname -r|sed 's,[^-]*-[^-]*-,,')
+
+
+# aptitude -r -t wheezy-backports install fglrx-legacy-driver
+
+This will also install the recommended fglrx-legacy-modules-dkms package. DKMS will build the fglrx module for your system.
+Create an Xorg server configuration file.
+Restart your system to enable the radeon blacklist.
+Saya, ga ngikutin prosedur diatas, yang saya lakukan adalah setting repo non-free, update repo, terus install fgrlx drivernya. saya lupa untuk melakukan konfigurasi dahulu, langsung aja main restart, hasilnya ya ga bisa masuk ke desktop, karena vga nya ga kedeteksi otomatis, padahal driver radeon yang opensource udah di blacklist.
+
+Karena, harus Install ulang Debian, maka proses instalasi vga AMD nya saya ga ngikutin prosedur resmi diatas lagi, tapi langsung install dari berkas .run yang di keluarkan AMD, bukan yang sudah dibikin paket oleh Developer Debian, karena itu saya mengikuti panduan di cchtml yang sedikit saya ubah. Kira-kira begini proses instalasi saya :
+ 1. Persiapan 
+ setting repo dulu termasuk non-free, terus update, kalo belum upgrade ke Debian 7.1 mending lakukan upgrade dulu. Setelah itu, install paket yang dibutuhkan untuk proses build paket : 
+$ apt-get install build-essential cdbs fakeroot dh-make debhelper debconf libstdc++6 dkms libqtgui4 wget execstack libelfg0 module-assistant dh-modaliases
+If you are using the x86_64 architecture (64 bit), be sure to install "ia32-libs" before proceeding!
+$ apt-get install ia32-libs
+Jika sebelumnya udah pernah install via repo Debian, sebaiknya lakukan uninstall dulu driver fglrxnya sebagai berikut ini  :
+$ sudo apt-get remove --purge fglrx fglrx_* fglrx-amdcccle* fglrx-dev* xorg-driver-fglrx
+Nah, proses diatas akan mengakibatkan proses lanjutan untuk meminta uninstall xserver yang dianggap sudah tidak diperlukan lagi oleh sistem dengan menjalankan perintaj apt-get autoremove. Jangan pernah dilakukan autoremove kalo ga xserver ente akan ke uninstall dan masuk ke mode text.
+2. Download Driver AMD terbaru
+setelah itu silahkan donlot dulu driver catalyst dari amd yang terbaru untuk linux disini 
+http://support.amd.com/us/gpudownload/linux/Pages/radeon_linux.aspx, kalopun sudah punya jangan lupa catat lokasinya di harddisk, semisal /home/shouso/Download/amd.run. Sesuaikan dengan kondisi di PC/Laptop Debian anda. ohya,jangan lupa drivernya di kasih permisi untuk bisa di eksekusi sebagai program ya,
+
+3. Install Drivernya via Mode Text
+Sebenarnya ga ada panduannya sih, insall driver vga amd harus pake mode text, cuma demi kenyamanan saja, saya mengikutin prosedur install driver NVIDIA yang mesti masuk ke text mode. Caranya, buka terminal, jadi superuser (root) dan matikan xservernya dengan menjalankan perintah 
+service gdm3 stop.
+setelah masuk ke mode text (tty) tinggal ketik di monitor 
+
+sh /home/shouso/Download/amd.run
+
+sesuaikan perintah diatas dengan lokasi driver anda yang udah di catat tadi. Jika, ga ada masalah maka akan ada panduannya kok, mau install atau bikin berkas .deb, karena saya gagal pas build .deb saya langsung install aja.
+
+nah tunggu sampai selesai.
+
+4. Jika sukses, jangan langsung reboot dulu, tapi lakukan dulu konfigurasinya dengan mengetikkan
+$ sudo amdconfig --initial -f
+setelah, itu edit xorg.conf nya sesuaikan dengan maksimal resolusi layar anda, dengan mengedit bagian screen nya seperti contoh berikut ini Section "Screen"
+       Identifier       "amdconfig-Screen[0]-0"
+       Device           "amdconfig-Device[0]-0"
+       Monitor          "0-DFP6"
+       DefaultDepth     24
+ 
+       SubSection "Display"
+           Viewport     0 0
+           Depth        24
+           # Big Desktop: 1920+1280=3200, max(1080,1024)=1080
+           Virtual      3200 1080
+       EndSubSection
+ 
+ EndSection
+edit aja yang udah ada, dan edit seksi displaynya.
+
+5. Kalo sudah coba di restart,
+ kalo berhasil maka akan masuk ke desktop dan cek apakah udah bisa make driver proprietarynya, kalo yang make Gnome Shell, paling gampang ya sudah bisa masuk ke Gnome Shell tanpa balik ke GNome Fallback
+
+Yep, begitulah pengalaman saya, semoga bermanfaat ya... terima kasih. isi xorg.conf saya, nanti saya upload agar memudahkan manteman yang sama kayak saya.. terima kasih..
+
+PS : isi xorg.conf saya dapat diliat di sini
+
+Next Read :
+http://wiki.debian.org/ATIProprietary#Debian_7_.22Wheezy.22
+http://wiki.cchtml.com/index.php/Debian#Removing_Catalyst.2Ffglrx
+http://support.amd.com/us/gpudownload/linux/Pages/radeon_linux.aspx
+support by www.faihana-store.com
