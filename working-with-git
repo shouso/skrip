@@ -1,4 +1,40 @@
+cara gampang belajar git dengan github
+belajar linux itu ga ada habisnya ya, ada saja hal baru yang menarik untuk dipelajari.
+sala satunya adalah bagaimana proses pengembangan kernel Linu menggunakan git
+apa sih itu git? git adalah apikasi yang digunakan untuk mengelola perubahan yang terjadi
+di source codenya linux atau yang kerennya SCM. git ini juga ditulis oleh Linus Torvalds.
+Nah, kalo pengen ngerasain cara versioning menggunakan git, ada baiknya kita coba dengan
+memanfaatkan layanan di github.com yang memang menyediakan layanan git secara free.
+Nah, bagaimana kita dapat belajar git dengan github, kira-kira ini langkahnya :
 1. setup git
-2. bikin akun di github
+setup git disini dimulai dengan install git, di mesin linux anda, bikin akun di github dan setup git untuk make github
+setelah itu tinggal setting git untuk make github, caranya tinggal setting user name, setting 
+email, sama setting password cache sebagai berikut ini
+git config --global user.name 'username anda'
+git config --globa user.email 'email anda di github'
+git config --global credential.helper 'cache --timeout=3600' = ini akan menyimpan pass anda selama sejam
+
+2. bikin repositori
+nah ini bagian asyiknya, setelah sukses setting git dan github, anda mesti buka webnya github.com
+dan bikin repositori dengan klik Create New Repo yang bertanda kayak buku itu. isi nama reponya, deskripsinya apa, dan setting juga untuk privat apa public
+Centang juga yang minta readmenya.
+
 3. push pull
-4. edit
+kalo udah jadi reponya, tinggal di clone pake perintah git clone http://github/user.name/repo.git
+tunggu selesai, terus masuk ke repo yang ada di lokal hasil klonung tadi.
+kalo udah tinggal bikin file atau edit file yang ada, terus add dan commit, jika udah selesi tinggal di push ke master di github.com
+cara add nya tinggal ketik git add 'nama-file' terus commitnya git commit -m "pesan"
+
+kalo udah tinggal di push dengan mengetik 
+
+git push origin master 
+terus isi user name dan password
+udah itu tunggu sampe push nya beres
+
+4. sukses...
+tada... kalo sukses, maka di repo yang anda bikin tadi akan ada file baru yang barusan anda push... sukses
+
+
+greeting.. ente udah caem maenan git...hehehe
+
+sumber : github.help
