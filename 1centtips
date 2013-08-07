@@ -1,5 +1,6 @@
 1 Cent Tips : Mengatasi Tor yang Ngadat di Debian Wheezy
 
+UPDATE : sebenernya ga perlu di ganti kepemilikannya, kalo ga ngejalanin vidalia, karena tor daemon otomatis jalan ketika booting. tinggal setting untuk make socks proxynya tor 127.0.0.1:9050
 
 Seneng anonim pas lagi internetan?? make Tor dong salah satu pilihannya. Apasih Tor?? Ah ribet ngebahasnya... silahkan yang yang lebih berkompeten membahasnya....hehe
  
