@@ -1,0 +1,1 @@
+#debian #laptop-mode #info akhirnya tau juga sebabnya, debian saya lebih adem dan senyap dibanding #PearOS7, jawabnya ada di laptop-mode. pas intstalasi #debian pasti dikasih pilihan mo pake laptop-mode atau ga, kalo iya mk kernelnya otomatis ngasih nilai 5 di /proc/sys/vm/laptop-mode, yang artinya laptop-mode aktif, tinggal
