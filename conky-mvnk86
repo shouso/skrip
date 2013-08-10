@@ -1,0 +1,47 @@
+autor:mvnky86
+tested on: Linux mint debian and LM-12, Ubuntu 12.04>>Precise Pangolin
+May 05 2012
+=======================================================================
+
+
+You can hide and unhide the conky by clicking on the shortcut 
+
+How to config this conky:
+
+1- copy .conky to your home folder.
+
+2- right click on conky => Properties => command =>/home/mvnky86/.conky/.conky/pop    then change mvnky86 to your username.
+
+3- install the conky_symbols_by_wiltur-d3ij3mi font .
+
+3.1. Go to terminal then write the following(Just use copy and paste):
+
+sudo apt-get install conky-all curl hddtemp lm-sensors python-statgrab
+
+then run those commands on terminal(Just use copy n paste):
+
+$ sudo chmod u+s /usr/sbin/hddtemp
+
+$ sudo sensors-detect
+
+Here in the 2nd command you will get YES/NO.so here you have to choose YES by closing your eyes :p.
+
+4- open rc3 with any editor and go to line 54 "u" is the distribution logo change it to your distro. >> For Ubuntu just change with "o" letter
+
+5- if you have CPU with 2 cores  don't change anything .. and if you have more than 2 cores just add it.
+
+6- modify your HDD just name and directory . 
+
+7- modify names eth* >> Local IP: ${alignr}${addr eth0} 
+
+8- save file.
+
+Start or stop conky from the shortcut (you can drag and drop file conky to desktop or to panel)
+
+==============================
+
+=     best regard mvnky86    =
+
+==============================
+
+
