@@ -1,0 +1,125 @@
+autor:mvnky86
+tested on: Linux mint debian and LM-12, Ubuntu 12.04 >> Precise Pangolin
+May 05 2012
+
+edit and test on Debian Wheezy by shouso
+August 11 2013
+=======================================================================
+
+
+background yes
+font ubuntu:size=8
+xftfont ubuntu:size=8
+use_xft yes
+xftalpha 0.5
+update_interval 1.0
+total_run_times 0
+
+# for gnome 2.x user uncomment the following line
+#own_window yes
+#own_window_type override
+#own_window_transparent yes
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# for gnome 3.x user uncomment the following line
+own_window_class Conky
+own_window yes
+own_window_type conky
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# for kde user
+#own_window yes
+#own_window_transparent yes
+##own_window_argb_visual yes
+#own_window_type normal
+#own_window_class conky-semi
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+double_buffer yes
+draw_shades yes
+draw_outline yes
+draw_borders no
+draw_graph_borders no
+minimum_size 250
+maximum_width 220
+default_color ffffff
+default_shade_color 000000
+draw_outline no
+alignment top_right
+gap_x 10
+gap_y 35
+no_buffers yes
+cpu_avg_samples 2
+override_utf8_locale yes
+uppercase no
+use_spacer none
+
+TEXT
+${goto 32}${font ubuntu:size=12:weight=bold}FATHI ${goto 100}${font ubuntu:size=11:weight=bold}${time %k}:${time %M}:${font ubuntu:size=11}${time %S}${font ubuntu:size=12:weight=bold}${alignr}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LBSF temperature temperature 30} °C${goto 810}${font}${font Sans:size=8:weight=bold}
+${goto 35}$stippled_hr
+${color #FFFFFF}${font ConkySymbols:size=20}o${font} ${voffset -10}${font ubuntu:size=8:weight=bold}SYSTEM»DEBIAN WHEEZY$font$color
+
+${goto 35}Nodename:${alignr}$nodename 
+${goto 35}Uptime:${alignr}$uptime
+${goto 35}Kernel:${alignr}$kernel $machine
+${voffset -2}${color #FFFFFF}${font ConkySymbols:size=16}I${font}$color${goto 32}${voffset -4}Local IP: ${alignr}${addr eth0}$color${font} 
+${goto 32}Public IP: ${alignr}${execi 1800 wget -q -O - http://ip.tupeux.com}$color${font}
+${goto 32}MACaddr:   ${alignr}${wireless_ap eth0}$color${font}
+${goto 4.5}${voffset 2}${font ConkySymbols:size=16}h${font}${voffset -6}${goto 32}CPU temperature:${alignr}${color #FCAF3E}${hwmon temp 1} °C$color
+${goto 4.5}${voffset 2}${font ConkySymbols:size=16}h${font}${voffset -6}${goto 32}HDD  temperature:${alignr}${color #FCAF3E}${exec /usr/sbin/hddtemp /dev/sda -n --unit=C} °C$color
+#${goto 4.5}${voffset 2}${font ConkySymbols:size=16}h${font}${voffset -6}${goto 32}HDD250  temperature:${alignr}${color #FCAF3E}${exec hddtemp /dev/sdb -n --unit=C} °C$color
+
+${goto 35}${font Droid Sans:size=7.5}CPU0: ${cpu cpu0}% ${goto 140}CPU1: ${cpu cpu1}%${font}
+${goto 35}${cpubar cpu0 8,80}${goto 140}${cpubar cpu1 8,80}
+${goto 35}${font Droid Sans:size=7.5}RAM: ${memperc}% ${goto 140}SWAP: ${swapperc}%${font}
+${goto 35}${membar 8,80}${goto 140}${swapbar 8,80}
+${color #FFFFFF}${voffset 8}${font ConkySymbols:size=14}N${font}  ${voffset -10}${font ubuntu:size=8:weight=bold}PROCESSES» $alignc ${goto 135} ${alignr}MEM   ${alignr}CPU$color${font}
+${goto 35}${top name 1} ${goto 125}$alignr${top mem 1} $alignr${top cpu 1}
+${goto 35}${top name 2} ${goto 125}$alignr${top mem 2} $alignr${top cpu 2}
+${goto 35}${top name 3} ${goto 125}$alignr${top mem 3} $alignr${top cpu 3}
+#${goto 35}${top name 4} ${goto 125}$alignr${top mem 4} $alignr${top cpu 4}
+#${goto 35}${top name 5} ${goto 125}$alignr${top mem 5} $alignr${top cpu 5}
+#${goto 35}${top name 6} ${goto 125}$alignr${top mem 6} $alignr${top cpu 6}
+#${goto 35}${top name 7} ${goto 125}$alignr${top mem 7} $alignr${top cpu 7}
+${goto 35}$stippled_hr
+${goto 35}${top_mem name 1} ${goto 125}$alignr${top_mem cpu 1} $alignr${top_mem mem 1}
+${goto 35}${top_mem name 2} ${goto 125}$alignr${top_mem cpu 2} $alignr${top_mem mem 2}
+${goto 35}${top_mem name 3} ${goto 125}$alignr${top_mem cpu 3} $alignr${top_mem mem 3}
+#${goto 35}${top_mem name 4} ${goto 125}$alignr${top_mem cpu 4} $alignr${top_mem mem 4}
+#${goto 35}${top_mem name 5} ${goto 125}$alignr${top_mem cpu 5} $alignr${top_mem mem 5}
+#${goto 35}${top_mem name 6} ${goto 125}$alignr${top_mem cpu 6} $alignr${top_mem mem 6}
+#${goto 35}${top_mem name 7} ${goto 125}$alignr${top_mem cpu 7} $alignr${top_mem mem 7}
+${goto 35}Processes: $processes ${goto 140}${goto 130}Running: $running_processes
+${color #FFFFFF}${font ConkySymbols:size=16}M${font}${voffset -10}${font ubuntu:size=8:weight=bold} HARDDISK»$font$color
+
+${goto 35}${font Droid Sans:size=7.5}Root: ${fs_free /} ${goto 140}Home: ${fs_free /home}${font}
+${goto 35}${fs_bar 8,80 /}${goto 140}${fs_bar 8,80 /home}
+${goto 35}${font Droid Sans:size=7.5}${fs_size /} ${goto 140}${fs_size /home}${font}
+
+#${goto 35}${font Droid Sans:size=7.5}Data: ${fs_free /media/sda3}${goto 140}VM: ${fs_free /media/sda5}${font}
+#${goto 35}${fs_bar 8,80 /media/sda3}${goto 140}${fs_bar 8,80 /media/sda5}
+#${goto 35}${font Droid Sans:size=7.5}${fs_size /media/sda3}${goto 140}${fs_size /media/sda5}${font}
+#${color #FFFFFF}${font ConkySymbols:size=16}I${font} ${voffset -10}${font ubuntu:size=8:weight=bold} LAN»$color${font}
+
+
+${voffset -13}${font ConkySymbols:size=14}d${font}${goto 32}${voffset -6}Up: ${upspeed eth0}${font}${goto 125}${voffset -2}${font ConkySymbols:size=14}e${font}Down: ${downspeed eth0}${font}
+${upspeedgraph eth0 10,90 000000 FF0000}${goto 125}${downspeedgraph eth0 10,90 000000 008000}
+${goto 32}Totalup: ${totalup eth0}${goto 125}Totaldown: ${totaldown eth0}
+
+${color #FFFFFF}${font ConkySymbols:size=16}G${font}${voffset -10}${font ubuntu:size=8:weight=bold} WIRELESS»$color${font}
+
+
+${voffset -13}${font ConkySymbols:size=14}d${font}${goto 32}${voffset -6}Up: ${upspeed wlan0}${font}${goto 125}${voffset -2}${font ConkySymbols:size=14}e${font}Down: ${downspeed wlan0}${font}
+${upspeedgraph wlan0 10,90 000000 FF0000}${goto 125}${downspeedgraph wlan0 10,90 000000 008000}
+${goto 32}Totalup: ${totalup wlan0}${goto 125}Totaldown: ${totaldown wlan0}
+${goto 35}Signal: ${wireless_link_qual_perc wlan0}
+${goto 35}ESSID: ${wireless_essid wlan0}
+${goto 35}Mode: ${wireless_mode wlan0}
+
+
+
+
+
+
+
