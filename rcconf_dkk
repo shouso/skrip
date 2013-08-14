@@ -1,0 +1,7 @@
+Ini laptop kok berat amir sih, padahal makenya juga cuma gnome-fallback... masalahnya apa sih?? cek punya cek ternyata service aplikasi saya lumayan banyak dan termasuk kelas berat. Ada 130 an daemon yang otomatis hidup setelah masuk ke desktop, jadi ya wajar juga sih RAM saya abis terus-terusan. Yang paling berat itu keknya openerp-server, apache, sama postgres.
+
+Lha, taunya gimana klo itu aplikasi paling banyak makan sumber daya RAM , pake aja top, atau kalo mau keren ya pake conky plus skripnya yang yahud. Terus, cek juga isi /etc/init.d untuk liat service apa aja yang jala ketika komputer (PC/laptop) idup. jangan lupa liatin juga lewat menu System Tools>>Preferences>>Startup Applications kalo make gnome-fallback untuk ngecek aplikasi apa saja yang otomatis jalan. matiin yang ga terlalu penting, kalo kasus saya sih bluetooth manager sama desktop sharingnya.
+
+Nah, kalo dari menu System Tools>>Preferences>>Startup Applications itu untuk aplikasi yang emang kedaftar di DE nya dan yang kita buat via menu tadi, tetapi sebagian aplikasi bikin sendiri file di /etc/init.d/ tanpa mendaftarkannya ke aplikasi tadi. Ini yang bikin bingung, mau gimana matiinnya.
+
+Ternyata setelah nanya  gugling, ada juga tools untuk memudahkan tugas tadi
